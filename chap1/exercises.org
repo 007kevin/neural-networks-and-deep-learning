@@ -1,8 +1,8 @@
-#+title: Exercise 1
+#+title: Exercises
 
-[[http://neuralnetworksanddeeplearning.com/chap1.html#exercises_191892][link]]
+[[http://neuralnetworksanddeeplearning.com/chap1.html#exercises_191892][* link]]
 
-* Sigmoid neurons simulating perceptrons, part I
+** Sigmoid neurons simulating perceptrons, part I
 Question:
 Suppose we take all the weights and biases in a network of perceptrons, and
 multiply them by a positive constant, $c>0$. Show that the behaviour of the
@@ -52,7 +52,7 @@ multiplied with positive constant c gives us
 
 which does not change the behaviour of the network.
 
-* Sigmoid neurons simulating perceptrons, part II
+** Sigmoid neurons simulating perceptrons, part II
 Question:
 Suppose we have the same setup as the last problem - a network of perceptrons.
 Suppose also that the overall input to the network of perceptrons has been
@@ -115,3 +115,70 @@ this can fail when w⋅x+b=0 because
 \begin{align*}
 \frac{1}{1+\exp(0)} = \frac{1}{1+1} = \frac{1}{2}
 \end{align*}
+
+* [[http://neuralnetworksanddeeplearning.com/chap1.html#exercise_513527][link]]
+** Determining bitwise representation of a digit
+
+third layer have activation at least 0.99. incorrect has 0.01
+
+| decimal | binary |
+|---------+--------|
+|       0 |   0000 |
+|       1 |   0001 |
+|       2 |   0010 |
+|       3 |   0011 |
+|       4 |   0100 |
+|       5 |   0101 |
+|       6 |   0110 |
+|       7 |   0111 |
+|       8 |   1000 |
+|       9 |   1001 |
+
+sigmoid definition
+
+\begin{eqnarray*}
+  \sigma(\sum_j w_j x_j+b)
+\end{eqnarray*}
+
+which is the sum of all weights plus the bias
+
+#+begin_src python
+import math
+
+def sigm(x):
+    return 1 / (1 + math.exp(-x))
+
+def f(actvns, weights, bias):
+    sum=0;
+    for i, a in enumerate(actvns):
+        sum+=a*weights[i]
+    return 0 if sigm(sum + bias) < 0.5 else 1
+
+def calculate(num):
+    actvns=[0.99 if x == num else 0.01 for x in range(10)]
+    o0 = f(actvns, [0,1,1,1,1,1,1,1,1,1], 0);
+    o1 = f(actvns, [0,1,1,1,1,1,1,1,1,1], 0);
+    o2 = f(actvns, [0,1,1,1,1,1,1,1,1,1], 0);
+    o3 = f(actvns, [0,1,1,1,1,1,1,1,1,1], 0);
+    return str(o0) + str(o1) + str(o2) + str(o3)
+
+output = ""
+for i in range(10):
+    output += str(i) + ": " + calculate(i) + "\n";
+
+return output
+#+end_src
+
+#+RESULTS:
+#+begin_example
+0: 1111
+1: 1111
+2: 1111
+3: 1111
+4: 1111
+5: 1111
+6: 1111
+7: 1111
+8: 1111
+9: 1111
+#+end_example
