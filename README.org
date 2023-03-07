@@ -1,0 +1,4 @@
+* neural-networks-and-deep-learning
+** resources
+How to approach exercises & problems:
+http://neuralnetworksanddeeplearning.com/exercises_and_problems.html
