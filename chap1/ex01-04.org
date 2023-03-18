@@ -1,6 +1,6 @@
 #+title: Exercises
 
-[[http://neuralnetworksanddeeplearning.com/chap1.html#exercises_191892][* link]]
+* Exercise - [[http://neuralnetworksanddeeplearning.com/chap1.html#exercises_191892][link]]
 
 ** Sigmoid neurons simulating perceptrons, part I
 Question:
@@ -116,7 +116,7 @@ this can fail when w⋅x+b=0 because
 \frac{1}{1+\exp(0)} = \frac{1}{1+1} = \frac{1}{2}
 \end{align*}
 
-* [[http://neuralnetworksanddeeplearning.com/chap1.html#exercise_513527][link]]
+* Exercise - [[http://neuralnetworksanddeeplearning.com/chap1.html#exercise_513527][link]]
 ** Determining bitwise representation of a digit
 
 third layer have activation at least 0.99. incorrect has 0.01
@@ -183,3 +183,69 @@ return output
 8: 1000
 9: 1001
 #+end_example
+
+* Exercise - [[http://neuralnetworksanddeeplearning.com/chap1.html#exercises_647181][link]]
+** Part I - Prove the assertion
+Lets suppose that were trying to make a move $\Delta v$ in position so as to
+decrease $C$ as much as possible. This is the same as minimizing
+
+\begin{eqnarray*}
+  \Delta C \approx \nabla C\cdot \Delta v
+\end{eqnarray*}
+
+because we want $\Delta C \leq 0$ as minimal as possible to reduce the cost function.
+
+Prove that when we constrain the size of the move $\|\Delta v \| = \epsilon$, for some fixed
+$\epsilon > 0$ that the choice of $\Delta v$ that minimizes $\nabla C\cdot \Delta v$ is
+
+\begin{eqnarray*}
+  \Delta v = - \eta \nabla C
+\end{eqnarray*}
+
+where
+
+\begin{eqnarray*}
+  \eta = \epsilon / \|\nabla C\|
+\end{eqnarray*}
+
+*** Proof
+... solved on paper.
+
+
+** Part II
+What happens when C is a function of just one variable? Can you provide a geometric
+interpretation of what gradient descent is doing in the one-dimensional case?
+
+In the one dimensional case, the gradient descent becomes the derivative of the cost function:
+
+\begin{eqnarray*}
+  \nabla C(x) = C'(x)
+\end{eqnarray*}
+
+and
+
+\begin{eqnarray*}
+  \Delta v(x) &=-\eta\nabla C \\
+              &=-\frac{\epsilon}{\lVert \nabla C \rVert} \nabla C \\
+              &=-\frac{\epsilon}{C'(x)} C'(x) \\
+              &=-\epsilon
+\end{eqnarray*}
+
+note the magnitude of a 1D vector is itself.
+
+so at every step we're moving
+
+* Exercise - [[http://neuralnetworksanddeeplearning.com/chap1.html#exercise_263792][link]]
+
+estimating the gradient vector using mini-batch of size $m$
+
+\begin{eqnarray*}
+  \frac{\sum_{j=1}^m \nabla C_{X_{j}}}{m} \approx \frac{\sum_x \nabla C_x}{n} = \nabla C
+\end{eqnarray*}
+
+
+|                     | advantage                                | disadvantage                                  |
+|---------------------+------------------------------------------+-----------------------------------------------|
+| online learning     | can learn from single data point         | takes more epochs to find local minimum       |
+| stochastic gradient | better at estimating the gradient vector | must wait until m data points before learning |
+|                     |                                          |                                               |

@@ -1,0 +1,49 @@
+#+title: Ex05
+
+[[http://neuralnetworksanddeeplearning.com/chap1.html#exercise_717502][link]]
+
+Write out Equation (22) in component form, and verify that it gives the same result as the rule (4) for computing the output of a sigmoid neuron.
+
+(22)
+
+\begin{eqnarray*}
+   a' = \sigma(w a + b)
+\end{eqnarray*}
+
+(4)
+
+\begin{eqnarray*}
+  \frac{1}{1+\exp(-\sum_j w_j x_j-b)}
+\end{eqnarray*}
+
+note x1, x2,... are inputs, w1, w2,... are weights and $b$ is bias.
+
+* answer
+
+\begin{eqnarray*}
+  a' &= \sigma(wa + b) \\
+     &= \sigma(
+            \begin{bmatrix}
+              w_{00} & \dots & w_{0k} \\
+              \vdots & \ddots & \vdots \\
+              w_{j0} & \dots & w_{jk}
+            \end{bmatrix}
+            \begin{bmatrix}
+              a_0 \\
+              \vdots \\
+              a_k
+            \end{bmatrix} +
+            \begin{bmatrix}
+              b_0 \\
+              \vdots \\
+              b_j
+            \end{bmatrix})
+\end{eqnarray*}
+
+
+
+note: taking 1 element of vector $a'$ looks like:
+
+\begin{eqnarray*}
+   a_j' &= \sigma(w_jk a_k + b_j) \\
+\end{eqnarray*}
